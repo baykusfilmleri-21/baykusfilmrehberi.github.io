@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baykuş Film</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      background: url('img2.jpg') center/cover no-repeat;
+      animation: moveBg 12s linear infinite;
+      filter: brightness(0.5);
+      z-index: -1;
+    }
+
+    @keyframes moveBg {
+      0% { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1000px;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .text {
+      flex: 1;
+    }
+
+    .text h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .text p {
+      color: #444;
+      margin-bottom: 20px;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .text button {
+      background-color: white;
+      border: 1px solid black;
+      padding: 10px 25px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    .text button:hover {
+      background-color: black;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* 🌟 Değiştirilen kısım: görsel doğal boyutta ve çerçevesiz */
+    .image img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      object-fit: unset;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .image img {
+        width: 80%;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="text">
+      <h1>BAYKUŞ<br>FİLMLERİ</h1>
+      <p>Aradğınız Her Film Baykuşta</p>
+      <button onclick="window.location.href='index.html'">Filmlere Göz</button>
+    </div>
+    <div class="image">
+      <img src="img3 kopya.png" alt="Ürün görseli">
+    </div>
+  </div>
+</body>
+</html>

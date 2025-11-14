@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filim Evi</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", sans-serif; }
+  body { background:#f4f6f8; color:#333; transition:0.3s; }
+  body.dark { background:#1e1e1e; color:#eee; }
+
+  /* Üst bar */
+  .topbar { display:flex; justify-content:space-between; align-items:center; background:#4a00e0; color:white; padding:10px 20px; }
+  .hamburger { cursor:pointer; font-size:1.6em; user-select:none; }
+  .topbar-center { display:flex; align-items:center; gap:10px; flex:1; justify-content:center; }
+  .topbar-center img { height:55px; width:auto; }
+  .topbar-center span { font-size:1.3em; font-weight:600; }
+  .home-btn, .settings-btn { cursor:pointer; font-size:1.6em; }
+
+  /* Paneller */
+  .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:90; }
+  .overlay.show { display:block; }
+  .panel { position:fixed; top:0; height:100%; width:250px; background:#fff; box-shadow:0 0 10px rgba(0,0,0,0.3); padding:20px; transition:0.3s; z-index:100; overflow:auto; }
+  body.dark .panel { background:#333; color:#eee; }
+  .left-panel { left:-250px; }
+  .left-panel.open { left:0; }
+  .right-panel { right:-250px; }
+  .right-panel.open { right:0; }
+  .panel button { display:block; width:100%; margin:10px 0; padding:10px; border:none; border-radius:6px; background:#4a00e0; color:white; cursor:pointer; text-align:left; }
+
+  /* Ana içerik */
+  main { padding:25px 8%; }
+  .section { margin-bottom:60px; }
+  .section h2 { margin-bottom:25px; color:#4a00e0; text-shadow:0 1px 2px rgba(0,0,0,0.2); }
+
+  /* Film grid */
+  .film-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+  .film-card { background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); transition:transform 0.2s, box-shadow 0.2s; }
+  .film-card:hover { transform:scale(1.03); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
+  body.dark .film-card { background:#333; }
+  .film-card img { width:100%; height:310px; object-fit:cover; }
+  .film-info { padding:10px; }
+  .film-info b { display:block; font-size:1.05em; margin-bottom:5px; }
+  .film-rating { margin-top:5px; font-weight:bold; color:#4a00e0; }
+
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="hamburger">&#9776;</div>
+    <div class="topbar-center">
+      <img src="img3 kopya.png" alt="Logo">
+      <span>Baykuş Film Rehberi</span>
+    </div>
+    <div>
+      <span class="home-btn" onclick="window.location.href='index2.html'">🏠</span>
+      <span class="settings-btn">⚙️</span>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Sol panel -->
+  <div class="left-panel panel" id="leftPanel">
+    <h3>Kategoriler</h3>
+    <button data-target="aksiyon">Aksiyon</button>
+    <button data-target="komedi">Komedi</button>
+    <button data-target="korku">Korku</button>
+    <button data-target="turk-komedi">Türk Komedi</button>
+    <button data-target="belgesel">Belgesel</button>
+     <button data-target="Animasyon">Animasyon</button>
+      <button data-target="Anime">Anime</button>
+      <button data-target="İletisim">İletişim</button>
+  </div>
+
+  <!-- Sağ panel -->
+  <div class="right-panel panel" id="rightPanel">
+    <h3>Ayarlar</h3>
+    <button onclick="setTheme('light')">🌞 Açık Mod</button>
+    <button onclick="setTheme('dark')">🌙 Koyu Mod</button>
+  </div>
+
+  <!-- İçerik -->
+  <main>
+
+    <!-- Aksiyon -->
+    <div class="section" id="aksiyon">
+      <h2>Aksiyon Filmleri</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="ft1.jpg"><div class="film-info"><b>Hızlı ve Öfkeli</b><p>Los Angeles’ta geçen filmde, gizli polis Brian O’Conner, gece yarışlarına katılan bir çetenin yasa dışı araba soygunlarına karıştığından şüphelenildiği için görevlendirilir. Çetenin lideri Dominic Toretto’ya yaklaşmak için sokak yarışlarına katılan Brian, zamanla Toretto’nun ekibine ve özellikle kız kardeşi Mia’ya yakınlaşır. Ancak polis kimliğiyle sadakati arasında kalır. Film, hız tutkusunu, sadakati ve suç dünyasının gerilimini bir araya getirir.
+</p><div class="film-rating">⭐ 6.8 / 10</div></div></div>
+        <div class="film-card"><img src="ft2.jpg"><div class="film-info"><b>Venom</b><p>Gazeteci Eddie Brock, uzaydan gelen simbiyot adlı bir yaratıkla istemeden birleşir. Bu simbiyot, Eddie’ye süper güçler kazandırırken aynı zamanda onun bedenini kontrol etmeye başlar. Eddie, içinde taşıdığı bu yaratıkla hem hayatta kalmaya hem de kötü niyetli Carlton Drake ve onun simbiyot ordusuna karşı mücadele etmeye çalışır. Film, karanlık mizahı ve aksiyon sahneleriyle dikkat çeker.</p><div class="film-rating">⭐6.6 / 10</div></div></div>
+        <div class="film-card"><img src="ft3.webp"><div class="film-info"><b>Kara Şövalye</b><p>Gotham’ı koruyan Batman, şehrin düzenini tehdit eden kaotik bir düşman olan Joker ile karşı karşıya gelir. Joker, sadece suç işlemekle kalmaz, aynı zamanda Gotham halkının ve Batman’in ahlaki sınırlarını zorlayarak şehri korku ve kaosa sürükler. Batman, suçla savaşırken kişisel değerleri ve adalet anlayışı arasında seçim yapmak zorunda kalır. Film, derin karakter çatışmaları, unutulmaz aksiyon sahneleri ve psikolojik gerilimle doludur.</p><div class="film-rating">⭐9.0 / 10</div></div></div>
+        <div class="film-card"><img src="ft4.jpg"><div class="film-info"><b>Geleceğe Dönüş</b><p>Genç Marty McFly, çılgın bilim insanı Doc Brown’un icadı olan zaman makinesiyle yanlışlıkla 1955 yılına gider. Burada, kendi ebeveynlerinin tanışmasını engelleyebilecek olaylara karışır ve hem kendi varlığını hem de aile geleceğini riske atar. Marty, geçmişi düzeltmeye çalışırken komik ve heyecanlı maceralara atılır, zaman yolculuğu ve yaratıcı olaylarla dolu unutulmaz bir serüven yaşar.</p><div class="film-rating">⭐ 8.5 / 10</div></div></div>
+        <div class="film-card"><img src="ft5.jpg"film-info"><b>The Gray Man</b><p>Dünyanın en yetenekli CIA suikastçilerinden Court Gentry (Gray Man), gizli görevlerinde ustalaşmış bir ajan olarak tanınır. Ancak patronları tarafından ihanete uğrayınca hedef haline gelir ve peşine düşen tetikçilerden kaçmak zorunda kalır. Film, dünyanın dört bir yanında geçen yüksek tempolu kovalamacalar, çatışmalar ve stratejik aksiyon sahneleri ile doludur. Gray Man’in hayatta kalma ve düşmanlarını alt etme mücadelesi, filmi sürekli heyecanlı ve gerilimli kılar.</p><div class="film-rating">⭐6.5 / 10</div></div></div>
+      </div>
+      
+    </div>
+
+    <!-- Drama -->
+    <div class="section" id="Drama">
+      <h2>Drama Filmleri</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="drm1.jpg"><div class="film-info"><b>Diriliş</b><p>Hugh Glass, bir keşif gezisinde ağır yaralanır ve arkadaşları tarafından terk edilir. Ölümle burun buruna gelen Glass, hayatta kalmak ve ailesinin intikamını almak için zorlu doğa koşullarında tek başına mücadele eder. Film, sert doğa koşulları, kanlı çatışmalar ve insanın hayatta kalma mücadelesini yoğun şekilde işler.</p><div class="film-rating">⭐8.0 / 10</div></div></div>
+        <div class="film-card"><img src="drm2.jpg"><div class="film-info"><b>Çizgili Pijamalı Çocuk</b><p>9 yaşındaki Bruno, II. Dünya Savaşı sırasında babasının Nazi kampında görev yapması nedeniyle yeni bir eve taşınır. Yalnızlık içinde kampın dışında yaşayan Shmuel adlı bir çocukla arkadaş olur. İki çocuk arasındaki masum dostluk, savaşın ve soykırımın acı gerçekleriyle sarsıcı bir şekilde karşı karşıya gelir. Film, savaşın etkilerini çocuk bakışıyla gösterir ve duygusal yoğunluğu yüksek bir hikaye sunar.</p><div class="film-rating">⭐7.8 / 10</div></div></div>
+        <div class="film-card"><img src="drm3.jpg"><div class="film-info"><b>Ayla</b><p>Kore Savaşı sırasında Türk asker Süleyman, küçük bir Koreli kızı, Ayla’yı bulur ve onu korumaya başlar. Aralarındaki bağ, savaşın acımasız koşullarına rağmen güçlü bir dostluk ve sevgi hikayesine dönüşür. Film, savaşın zorluklarını ve insan ilişkilerinin dayanıklılığını dokunaklı şekilde aktarır.</p><div class="film-rating">⭐8.0 / 10</div></div></div>
+        <div class="film-card"><img src="drm4.jpg"><div class="film-info"><b>Kağıttan Hayatlar</b><p>İstanbul sokaklarında yaşayan Mehmet, kimsesiz çocuklarla ilgilenen bir geri dönüşüm işçisidir. Hayatın zorluklarına rağmen çocuklarla kurduğu bağ, hem onları hem de kendisini koruma mücadelesine dönüşür. Film, sosyal sorunları ve insan dayanışmasını gerçekçi ve dokunaklı bir şekilde anlatır.</p><div class="film-rating">⭐7.5 / 10</div></div></div>
+        <div class="film-card"><img src="drm5.jpg"><div class="film-info"><b>Sadık Dostum</b><p>Sevimli bir köpek yavrusu olan Bella’yı terk edilmiş bir binada bulan genç Lucas, onu kendi evine götürür ama köpek evde kalamaz hale gelir. Bu durum Bella’yı başka bir yere gönderilmek zorunda bırakır. Ancak Bella, sahibine olan bağlılığı sayesinde evine dönmek için yüzlerce kilometrelik zorlu bir yolculuğa çıkar. Bu süreçte farklı insanlarla ve hayvanlarla karşılaşır, onları etkiler ve kendi içindeki güçle sahibine ulaşma mücadelesi verir.</p><div class="film-rating">⭐6.7 / 10</div></div></div>
+      </div>
+    </div>
+
+    <!-- Korku -->
+    <div class="section" id="korku">
+      <h2>Korku Filmleri</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="korku1.jpg"><div class="film-info"><b>Kolesksiyoncu</b><p>Borçlarla boğuşan tamirci Arkin, büyük bir fırsat gördüğü zengin bir çiftin evini soymaya karar verir. Fakat evin içinde çok daha kötü niyetli biri vardır: maskeli bir katil, evi ölümcül tuzaklarla donatmış, ailesini esir almıştır. Arkin, hem heist işini tamamlamaya çalışırken hem de evden sağ çıkma mücadelesi verir. Gerilim ve kanlı sahnelerin üst üste geldiği bir korku-gerilim filmi.</p><div class="film-rating">⭐6.3 / 10</div></div></div>
+        <div class="film-card"><img src="korku2.jpg"><div class="film-info"><b>It</b><p>1980’lerin küçük Amerikan kasabası Derry’de, yedi dışlanmış çocuk “Korku Kulübü” kurar. Kasaba tarihinin her 27 yılda bir tetiklediği şekil değiştiren kötülük olan palyaço Pennywise, çocukları tek tek avlar. Çocuklar hem kendi içsel korkularıyla hem de dışsal bu büyük tehdit ile yüzleşmek zorundadır. Bu sırada arkadaşlık, dayanışma ve cesaret temaları öne çıkar.</p><div class="film-rating">⭐7.3 / 10</div></div></div>
+        <div class="film-card"><img src="korku3.jpg"><div class="film-info"><b>Countdown</b><p>Genç bir hemşire, bir uygulamayı indirir: bu uygulama kullanıcının ne zaman öleceğini tahmin etmektedir. Uygulama ona sadece birkaç gün kaldığını gösterir ve ardından kaçış başlar: zamanla yarışır, uygulamanın tahminini tersine çevirmeye çalışır. Modern teknoloji ile gelen ölüm tehdidi temalı, jump‑scare’lı bir gerilim filmi.</p><div class="film-rating">⭐5.4 / 10</div></div></div>
+        <div class="film-card"><img src="korku4.jpg"><div class="film-info"><b>Kutsal Damacana</b><p>Eski bir denizci olan Fikret, İstanbul’a yerleşmiş ve sahte rahip kılığında bir işi kabul eder. Zengin bir kadının kız kardeşine büyü yapıldığına inanılır ve Fikret işin içine girer. Komedi öğeleri ağır basan filmde, Fikret’in bu sahte rahip rolüyle yaşadığı absürt olaylar ve İstanbul’un farklı sokaklarında geçen eğlenceli sahneler ön planda.</p><div class="film-rating">⭐5.1 / 10</div></div></div>
+        <div class="film-card"><img src="korku5.jpg"><div class="film-info"><b>Testere</b><p>İki adam, bir banyonun zincirlenmiş halde uyandıklarını fark eder. Ortada bir ceset, ve devasa bir “oyunun” parçası oldukları anlaşılır: efsanevi katil Jigsaw, kurbanlarını ölümcül tuzaklarla sınamaktadır. Sinirlerin gerildiği, beklenmedik kurgularla dolu, korku-gerilim türünün önemli örneklerinden biri.</p><div class="film-rating">⭐7.6 / 10</div></div></div>
+      </div>
+    </div>
+
+    <!-- Türk Komedi -->
+    <div class="section" id="turk-komedi">
+      <h2>Türk Komedi Filmleri</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="tr1.jpg"><div class="film-info"><b>Recep İvedik</b><p>İstanbul’un Balat semtinde yaşayan üç kardeş — Gürkan, Duran ve Orhan — zorluklarla boğuşmaktadır. Gürkan taksicilik yaparken, Duran aşık olmuştur ve Orhan pilav satarak eve katkı sağlamaya çalışır. Bir gün Orhan’ın tezgâhına mafya bağlantılı bir elmas koleksiyonu düşer; kardeşler bu olayın içine girince işin rengi değişir. Kaos, mafya, kaçış ve aile bağları iç içe geçer.</p><div class="film-rating">⭐5.4 / 10</div></div></div>
+        <div class="film-card"><img src="tr2.jpg"><div class="film-info"><b>Organize İşler</b><p>İstanbul’da küçük çaplı suçlarla uğraşan bir çete başı olan Asım Noyan, bir gün Superman kıyafetiyle intihar etmeye çalışan Samet’i kurtarır ve onu grubuna dahil eder. Samet, sahnede komedyenlik yapmaya çalışırken kendini dolandırıcılık ve araba kaçırma işlerinde bulur. İşler planlandığı gibi gitmez ve karakterler kendi yolculuklarını yapar.</p><div class="film-rating">⭐7.4 / 10</div></div></div>
+        <div class="film-card"><img src="tr3.jpg"><div class="film-info"><b>Aykut Enişte</b><p>Yalnızlık çeken ve evlenip yerleşmek isteyen Aykut, sevgilisi Nurhan’la düğün hazırlığındadır. Ancak dükkânına giren hırsız her şeyi altüst eder: Aykut’un birikimi giderken karşısına sigorta şirketinden gelen Gülşah çıkar ve işler karışır. Aykut kendini bir anda iki ailenin damadı olarak bulur ve bu durumu çözmek için koşuşturmaya başlar.</p><div class="film-rating">⭐7.0 / 10</div></div></div>
+        <div class="film-card"><img src="tr4.jpg"><div class="film-info"><b>Aile Arasında</b><p>Kendi halinde ama kaba saba bir adam olan Recep İvedik, hayatını sıradan şekilde sürdürürken mahalledeki arkadaşlarıyla takılır. Bir gün eski sevgilisiyle karşılaşır ve kendini beklenmedik bir yarışma organizasyonunun içinde bulur. Recep’in kaba saba ama iyi niyetli halleri, başına türlü komik ve absürt olaylar açar. Film, bol gülme, yanlış anlaşılmalar ve Recep’in tuhaf çözümleriyle dolu bir komedi sunar.</p><div class="film-rating">⭐5.0 / 10</div></div></div>
+        <div class="film-card"><img src="tr5.jpg"><div class="film-info"><b>Hababam Sınıfı</b><p>Özel bir lisede okuyan miskin, tembel ama gönlü geniş öğrencilerden oluşan bir sınıf — “Hababam Sınıfı” — okulda kendi kurallarını koymuş gibidir. Yeni gelen katı bir müdür ya da öğretmen sınıf düzenini değiştirmeye çalışınca, öğrencilerle öğretmenler arasında espri dolu çatışmalar başlar. Film öğrencilik, arkadaşlık ve okul düzeni üzerine sıcak bir komedi sunar.</p><div class="film-rating">⭐Bilinmiyor</div></div></div>
+      </div>
+    </div>
+
+    <!-- Belgesel -->
+    <div class="section" id="belgesel">
+      <h2>Belgeseller</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="belgesel1.jpeg"><div class="film-info"><b>Our Planet</b><p>Dünya üzerindeki doğal habitatları, canlı türlerini ve bunların karşılaştığı iklim değişikliği tehditlerini kapsamlı şekilde ele alan bir doğa belgeseli dizisi. Kutup bölgelerinden yağmur ormanlarına, okyanus derinliklerinden çöllere kadar geniş bir yelpazede çekimlerle, doğanın hem güzellikleri hem de kırılganlıkları gözler önüne seriliyor.</p><div class="film-rating">⭐9.2 / 10</div></div></div>
+        <div class="film-card"><img src="belgesel2.jpg"><div class="film-info"><b>Atlas World</b><p>Bu yapım, dünyamızın farklı bölgelerindeki doğayı – hem coğrafi açıdan hem biyolojik açıdan – büyük bir sinematik zenginlikle ele alıyor. Güzellik ve kırılganlık bir arada, görsel olarak güçlü ama düşündürücü bir anlatımla.</p><div class="film-rating">⭐8.7 / 10<</div></div></div>
+        <div class="film-card"><img src="belgesel3.jpg"><div class="film-info"><b>Rise of Empires: Ottoman</b><p>Osmanlı İmparatorluğu’nun kuruluş dönemi ve özellikle II. Mehmed’in Konstantinopolis’i fethi etrafında şekillenen dramatize edilmiş bir belgesel‑seri. Tarih, savaş stratejileri, dönemin aktörleri ve büyük olaylar sinematik bir anlatımla sunuluyor.</p><div class="film-rating">⭐9.0 / 10</div></div></div>
+        <div class="film-card"><img src="belgesel4.jpg"><div class="film-info"><b>İnancın Hikayesi</b><p>unuculuğunu Morgan Freeman’ın yaptığı bu belgesel dizisi, farklı dinlerin, inançların, ritüellerin kökenlerini ve insanların inanç sayesinde nasıl bağ kurduğunu keşfe çıkıyor. İnsanlığın “inanç”la ilişkisini kültürel, tarihi ve ruhsal yönleriyle ele alıyor.</p><div class="film-rating">⭐7.5 / 10</div></div></div>
+        <div class="film-card"><img src="belgesel5.jpg"><div class="film-info"><b>Formula 1</b><p>Dünya çapında en üst düzey otomobil yarışlarından biri olan Formula One’un perde arkasına inen bir belgesel‑seri. Sürücüler, takım patronları, sezon boyunca yaşanan gerilimler, stratejiler ve kişisel hikâyeler bütün yönleriyle ortaya konuyor. Yarışlardan çok “insan”, “takım” ve “arka plan” öne çıkıyor.</p><div class="film-rating">⭐8.1 / 10</div></div></div>
+      </div>
+    </div>
+     <!-- Animasyon -->
+    <div class="section" id="Animasyon">
+      <h2>Animasyon</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="animasyon1.jpeg"><div class="film-info"><b>Luka</b><p>950’lerde İtalyan Rivierası’nda geçen filmde, deniz altındaki dünyadan gelen genç deniz canavarı Luca, bir insan formuna kavuştuğu sahil kentinde arkadaşı Alberto ile birlikte maceralara atılır. İnsanlar tarafından kabul görmeye çalışırken, kendi kimliğini ve arkadaşlığın gücünü keşfeder.</p><div class="film-rating">⭐7.5 / 10</div></div></div>
+        <div class="film-card"><img src="animasyon2.jpg"><div class="film-info"><b>Yukarı Bak</b><p>Yaşlı Carl Fredricksen, hayatının aşkıyla bir ev yapıp bu evi balonlarla Güney Amerika’ya uçurur. Yolda genç izci Russell ile karşılaşır, birlikte sıra dışı bir maceraya atılırlar. Aile, kayıp, dostluk gibi duygusal temalar ön plandadır.</p><div class="film-rating">⭐8.3 / 10</div></div></div>
+        <div class="film-card"><img src="animasyon3.jpg"><div class="film-info"><b>COCO</b><p>Müzik yapmanın ailede yasak olduğu bir ortamda yaşayan genç Miguel, bir şekilde Ölüler Diyarı’na geçiş yapar. Burada büyük büyük dedesi ile karşılaşır ve hem müziğe hem de aile bağlarına dair büyük sırları çözmek zorunda kalır.</p><div class="film-rating">⭐8.4 / 10</div></div></div>
+        <div class="film-card"><img src="animasyon4.jpg"><div class="film-info"><b>Bolt</b><p>Süper güçlere sahip olduğunu sanan köpek Bolt, aslında bir televizyon şovunun içinde olduğunu fark etmeden gerçek dünyaya atılır. Sahibi Penny’yi bulmak ve “gerçek” bir kahraman olmak için yola çıkar; bu süreçte arkadaşlık, sadakat ve kendini keşfetme ön plandadır.</p><div class="film-rating">⭐6.9 / 10</div></div></div>
+        <div class="film-card"><img src="animasyon5.jpg"><div class="film-info"><b>Ratatuy</b><p>Paris’te yaşayan genç bir fare olan Remy, yemek yapmaya tutkulu ve yeteneklidir. İnsanların yaşadığı dünyada şef olma hayalini gerçekleştirmek için genç aşçı Linguini ile iş birliği yapar. Remy, gizlice mutfakta yemekler yaparken arkadaşlığı, yaratıcılığı ve tutkuyu keşfeder. Film, hem komedi hem de ilham verici bir hikaye sunar; hayallerin peşinden gitmenin önemi vurgulanır.</p><div class="film-rating">⭐8.0 / 10</div></div></div>
+      </div>
+    </div>
+      <!-- Anime -->
+    <div class="section" id="Anime">
+      <h2>Anime</h2>
+      <div class="film-grid">
+        <div class="film-card"><img src="anime1.jpg"><div class="film-info"><b>Aşırıcılar</b><p>10 cm boyunda olan “Aşırıcılar” adlı küçük insanlar, insanların evlerinde hayatlarını sürdüren gizli bir topluluktur. Arrietty adındaki genç bir aşırıcı, ev sahibi insan çocuk Sho ile tanışır. Ancak dostlukları, hem Arrietty’nin ailesinin güvenliğini hem de insanların varlığını tehdit eden risklerle doludur. 
+Film Sınılama
++2
+sadibey.com
++2</p><div class="film-rating">⭐7.5 / 10</div></div></div>
+        <div class="film-card"><img src="anime4.jpg"><div class="film-info"><b>Demon Slyayer</b><p>Ailesi iblisler tarafından öldürülen Tanjiro, hayatta kalan ama iblise dönüşen kız kardeşi Nezuko’yu kurtarmak için iblis avcısı olur. Yol boyunca zorlu eğitimler alır, güçlü iblislerle savaşır ve ailesinin intikamını almaya çalışırken büyük sırlarla yüzleşir. Aksiyon, duygu ve görsel kalite ön plandadır.</p><div class="film-rating">⭐7.6 / 10</div></div></div>
+        <div class="film-card"><img src="anime2.jpg"><div class="film-info"><b>Naruto</b><p>Naruto Uzumaki, köyündeki insanlar tarafından dışlanan, içinde dokuz kuyruklu şeytan tilki mühürlü bir çocuktur. En büyük hayali “Hokage” olup herkes tarafından kabul edilmek ve güçlü bir ninja olmaktır. Zorlu eğitimler, arkadaşlıklar, rakipler ve büyük savaşlar arasında Naruto hem güçlenir hem de kendi kaderini şekillendirir.</p><div class="film-rating">⭐9,0/10</div></div></div>
+        <div class="film-card"><img src="anime3.jpg"><div class="film-info"><b>Death Note</b><p>Lise öğrencisi Light Yagami, yalnızca ismini yazdığı kişiyi öldürebilen gizemli bir defter bulur. Dünyayı suçlulardan temizlemek isteyen Light, zamanla tanrı kompleksine kapılır. Peşine düşen dâhi dedektif L ile psikolojik zeka savaşına girer. İki tarafın birbirini alt etmeye çalıştığı karanlık ve gerilim dolu bir hikâyedir.</p><div class="film-rating">⭐8,6/10</div></div></div>
+        <div class="film-card"><img src="anime5.jpg"><div class="film-info"><b>Ponyo</b><p>Denizde yaşayan küçük balık kızı Ponyo, insan çocuğu Sosuke ile tanışınca insan olmak ister. Ancak Ponyo’nun dönüşümü doğanın dengesini bozmaya başlar ve kasabayı tehlikeye sürükler. Sosuke ile Ponyo’nun dostluğunu, masumiyeti ve doğayla uyumu anlatan sıcak, masalsı bir hikâyedir.</p><div class="film-rating">⭐7,6/10</div></div></div>
+      </div>
+    </div>
+    <div class="section" id="İletisim">
+      <h2>İletişim ve Detaylı Bilgi</h2>
+       <div class="film-grid"></div>
+       <div class="film-card"><div class="film-info"><b><strong>Bu açılan site tamamen eğitim amaçlı olup donlandırıcılık vb işlemler için değildir her türlü sorun/iletişim/iş ortaklığı için email den ulaşabilirsiniz.</strong>
+    </b><strong>E-Posta:</strong>baykusfilmleri@gmail.com<p>
+
+  </main>
+
+<script>
+  const overlay = document.getElementById('overlay');
+  const leftPanel = document.getElementById('leftPanel');
+  const rightPanel = document.getElementById('rightPanel');
+  const hamburger = document.querySelector('.hamburger');
+  const settingsBtn = document.querySelector('.settings-btn');
+
+  function closePanels(){ leftPanel.classList.remove('open'); rightPanel.classList.remove('open'); overlay.classList.remove('show'); }
+  function toggleLeft(){ const o=leftPanel.classList.contains('open'); closePanels(); if(!o){leftPanel.classList.add('open');overlay.classList.add('show');}}
+  function toggleRight(){ const o=rightPanel.classList.contains('open'); closePanels(); if(!o){rightPanel.classList.add('open');overlay.classList.add('show');}}
+  hamburger.onclick=toggleLeft; settingsBtn.onclick=toggleRight; overlay.onclick=closePanels;
+  function setTheme(mode){ document.body.classList.toggle('dark', mode==='dark'); }
+  document.querySelectorAll('.left-panel button').forEach(b=>b.onclick=()=>{document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});closePanels();});
+</script>
+
+</body>
+</html>
